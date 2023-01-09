@@ -1,2 +1,3 @@
 pychord
 pyTelegramBotAPI
+tabulate

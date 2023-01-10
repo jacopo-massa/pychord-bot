@@ -32,7 +32,13 @@ def send_compose(message):
 def send_chord_analysis(message):
     ch = pychord.Chord(message.text[1:-1])
     text = get_chord_analysis_message(ch)
-    bot.reply_to(message, f"````{text}```", parse_mode="MARKDOWN")
+    bot.reply_to(message, text, parse_mode="MARKDOWN")
+
+@bot.message_handler(regexp="\{([A-Z#b]|\s)+\}")
+def send_compose_analysis(message):
+    notes = message.text[1:-1].upper().split()
+    text = get_compose_analysis_message(notes)
+    bot.reply_to(message, text, parse_mode="MARKDOWN")
 
 
 if __name__ == '__main__':

@@ -7,7 +7,6 @@ import requests
 import flask
 
 from telebot import types
-from telebot.apihelper import ApiTelegramException
 from messages import *
 from analysis import *
 
@@ -110,10 +109,3 @@ def send_inline_compose_analysis(query):
 
 if __name__ == '__main__':
     bot.infinity_polling(skip_pending=True)
-else:
-    gunicon_logger = logging.getLogger('gunicorn.error')
-    bot.logger.handlers = gunicon_logger.handlers
-    bot.logger.setLevel(gunicon_logger.level)
-
-    app.logger.handlers = gunicon_logger.handlers
-    app.logger.setLevel(gunicon_logger.level)

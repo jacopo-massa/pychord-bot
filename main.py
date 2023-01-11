@@ -106,6 +106,5 @@ def send_inline_compose_analysis(query):
         logger.exception(e)
 
 
-
 if __name__ == '__main__':
     bot.infinity_polling(skip_pending=True)

@@ -2,4 +2,3 @@ pychord
 pyTelegramBotAPI
 Flask
 Gunicorn
-gevent

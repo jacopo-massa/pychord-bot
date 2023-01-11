@@ -1,2 +1,5 @@
 pychord
 pyTelegramBotAPI
+Flask
+gunicorn
+gevent

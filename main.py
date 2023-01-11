@@ -4,8 +4,10 @@ import os
 import re
 import logging
 import requests
+import flask
 
 from telebot import types
+from telebot.apihelper import ApiTelegramException
 from messages import *
 from analysis import *
 
@@ -20,6 +22,23 @@ bot = telebot.TeleBot(BOT_TOKEN, parse_mode="MARKDOWN")
 logger = telebot.logger
 telebot.logger.setLevel(logging.INFO) # Outputs debug messages to console.
 
+app = flask.Flask(__name__)
+
+# Empty webserver index, return nothing, just http 200
+@app.route('/', methods=['GET', 'HEAD'])
+def index():
+    return ''
+
+# Process webhook calls
+@app.route('/handle-messages', methods=['POST'])
+def webhook():
+    if flask.request.headers.get('content-type') == 'application/json':
+        json_string = flask.request.get_data().decode('utf-8')
+        update = types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return "!", 200
+    else:
+        flask.fl.abort(403)
 
 
 @bot.message_handler(commands=['start'])
@@ -92,4 +111,9 @@ def send_inline_compose_analysis(query):
 if __name__ == '__main__':
     bot.infinity_polling(skip_pending=True)
 else:
-    pass
+    gunicon_logger = logging.getLogger('gunicorn.error')
+    bot.logger.handlers = gunicon_logger.handlers
+    bot.logger.setLevel(gunicon_logger.level)
+
+    app.logger.handlers = gunicon_logger.handlers
+    app.logger.setLevel(gunicon_logger.level)

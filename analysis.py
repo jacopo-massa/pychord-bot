@@ -34,7 +34,7 @@ def get_chord_image_url(chord: Chord):
 	url = requests.post(CHORD_URL, data={"chord": chord.chord, "instrument": "piano"}).text.split("src=")[1][1:-2]
 	return url
 
-# not in use
+# TODO generate thumbnails for inline mode, using IMGBUN API service
 def get_thumb_image_url(text):
 	url = requests.get(THUMBNAIL_URL, params={"key": IMGBUN_API_KEY, "text": text, "size": 5}).json()["direct_link"]
 	return url

@@ -27,17 +27,16 @@ app = flask.Flask(__name__)
 # Empty webserver index, return nothing, just http 200
 @app.route('/', methods=['GET', 'HEAD'])
 def index():
-    return ''
+    return "", 200
 
 # Process webhook calls
 @app.route('/handle-messages', methods=['POST'])
 def webhook():
     if flask.request.headers.get('content-type') == 'application/json':
         json_string = flask.request.get_data().decode('utf-8')
-        app.logger.debug(f"JSON: {json_string}")
         update = types.Update.de_json(json_string)
         bot.process_new_updates([update])
-        return '', 200
+        return "!", 200
     else:
         flask.abort(403)
 
@@ -110,7 +109,8 @@ def send_inline_compose_analysis(query):
 
 if __name__ == '__main__':
     # bot.remove_webhook()
-    bot.infinity_polling(skip_pending=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
+    # bot.infinity_polling(skip_pending=True)
 else:
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers

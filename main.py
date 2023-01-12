@@ -10,6 +10,7 @@ from telebot import types
 from messages import *
 from analysis import *
 
+
 # get environment variables
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 IMGBUN_API_KEY = os.getenv('IMGBUN_API_KEY')
@@ -33,9 +34,10 @@ def index():
 def webhook():
     if flask.request.headers.get('content-type') == 'application/json':
         json_string = flask.request.get_data().decode('utf-8')
+        app.logger.debug(f"JSON: {json_string}")
         update = types.Update.de_json(json_string)
         bot.process_new_updates([update])
-        return ''
+        return '', 200
     else:
         flask.abort(403)
 

@@ -107,4 +107,12 @@ def send_inline_compose_analysis(query):
 
 
 if __name__ == '__main__':
+    # bot.remove_webhook()
     bot.infinity_polling(skip_pending=True)
+else:
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
+
+    telebot.logger.handlers = gunicorn_logger.handlers
+    telebot.logger.setLevel(gunicorn_logger.level)

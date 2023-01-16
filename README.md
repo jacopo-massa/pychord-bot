@@ -16,14 +16,14 @@ Currently the bot supports the following commands:
  - `/chord` - Analyse a chord (sent with the format `[Cm7]`)
  - `/compose` - Compose a chord (sent with the format `{A C# E}`)
 
-The bot can be used also with the inline mode, by typing `@pychordBot` in any chat and then requesting an analysis or a composition with the same format as above.
+The bot can be used also with the [inline mode](https://core.telegram.org/bots/inline), by typing `@pychordBot` in any chat and then requesting an analysis or a composition with the same format as above.
 
 ## How to run
-First of all you need to set (as _environment variable_) the `TELEGRAM_TOKEN` of your bot. You can get it from [@BotFather](https://t.me/BotFather).
+First of all you need to set (as _environment variable_) the `BOT_TOKEN` of your bot. You can get it from [@BotFather](https://t.me/BotFather).
 
 Then you can run the bot with:
-```python
-    python3 bot.py
+```bash
+python3 bot.py
 ```
 
 Or you can set another _environment variable_ `WEBHOOK_URL` to enable the webhook mode. In this case you will need to use an hosting platform that supports webhooks (e.g. [Render](https://render.com/)).
@@ -31,5 +31,5 @@ Or you can set another _environment variable_ `WEBHOOK_URL` to enable the webhoo
 ## GUNICORN CONFIGURATION
 To host the bot on the major platforms, we need to use an HTTP server. We use [gunicorn](https://gunicorn.org/) to do that, with the `gevent` worker class. To work properly, gunicorn should be launched with the following start command:
 ```bash
-    gunicorn -b 0.0.0.0:5000 main:app -k gevent -c geventlet-config.py
+gunicorn -b 0.0.0.0:5000 main:app -k gevent -c geventlet-config.py
 ```

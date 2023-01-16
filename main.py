@@ -1,6 +1,7 @@
 from pychordbot import bot, app
 
 import os
+import logging
 
 # get desired webhook, if set
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')

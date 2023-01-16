@@ -9,7 +9,7 @@ WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
 
 # reset webhook, if set
-bot.reset_webhook()
+bot.remove_webhook()
 
 # if running locally, start polling, else set desired webhook
 if __name__ == '__main__':

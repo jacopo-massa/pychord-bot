@@ -1,11 +1,15 @@
-# pychord-bot 🎹
+<div align='center'>
+<picture>
+    <img width=250 alt="pychord-bot-logo" src="img/logo.png"/>
+</picture>
+</div>
+
+<hr>
 
 A telegram bot that exploits the power of [pychord](https://pypi.org/project/pychord/) library to:
 
  - Analyse a chord, given its name (e.g. `Cm7`)
  - Compose a chord, given its notes (e.g. `A C# E`)
- 
-<hr>
 
 ## How to use
 You can find the bot at [@pychordBot](https://t.me/pychordBot).
